@@ -1,0 +1,59 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  font-family: "Gotham Rounded", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: rgb(255, 201, 59);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 201, 59, 1) 33%,
+    rgba(81, 226, 255, 1) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.calculator {
+  height: 600px;
+  width: 30%;
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: 120px repeat(5, 100px);
+}
+.span-two {
+  grid-column: span 2;
+}
+
+.output {
+  background-color: rgba(0, 0, 0, 0.9);
+  grid-column: 1 / 5;
+  color: white;
+  font-size: 3rem;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.previous-output {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+button {
+  background-color: rgba(255, 255, 255, 0.75);
+  border: solid 1px white;
+
+  cursor: pointer;
+}
+button:hover {
+  transition: ease-in-out 0.2s;
+  background-color: white;
+}
