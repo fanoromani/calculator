@@ -31,36 +31,27 @@ class Calculator {
     switch (this.previousOutput.slice(-1)) {
       case "+":
         result = a + b;
-        this.currentOutput = result;
-        this.previousOutput = "";
-        this.updateDisplay();
 
         break;
       case "-":
         result = a - b;
-        this.currentOutput = result;
-        this.previousOutput = "";
-        this.updateDisplay();
 
         break;
       case "*":
         result = a * b;
-        this.currentOutput = result;
-        this.previousOutput = "";
-        this.updateDisplay();
 
         break;
       case "÷":
         result = a / b;
-        this.currentOutput = result;
-        this.previousOutput = "";
-        this.updateDisplay();
 
         break;
 
       default:
         break;
     }
+    this.currentOutput = result;
+    this.previousOutput = "";
+    this.updateDisplay();
   }
   updateDisplay() {
     currentOutput.innerText = this.currentOutput;
@@ -92,10 +83,12 @@ operationButtons.forEach((button) => {
 
 acButton.addEventListener("click", () => {
   calculator.clear();
+  this.updateDisplay();
 });
 
 equalsButton.addEventListener("click", () => {
   calculator.compute();
+  this.updateDisplay();
 });
 
 delButton.addEventListener("click", () => {
