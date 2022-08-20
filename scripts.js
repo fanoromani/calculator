@@ -14,8 +14,22 @@ class Calculator {
     if (number === "." && this.currentOutput.innerText.includes(".")) return;
     this.currentOutput.innerText += number;
   }
-  chooseOperation(operation) {}
-  compute() {}
+  chooseOperation(operation) {
+    this.previousOutput.innerText = this.currentOutput.innerText + operation;
+    this.currentOutput.innerText = "";
+  }
+  compute(operation) {
+    switch (operation) {
+      case "+":
+        parseFloat(this.previousOutput.innerText) +
+          parseFloat(this.currentOutput.innerText);
+
+        break;
+
+      default:
+        break;
+    }
+  }
   updateDisplay() {}
 }
 
