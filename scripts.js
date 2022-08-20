@@ -1,28 +1,60 @@
 class Calculator {
   constructor(previousOutput, currentOutput) {
-    this.previousOutput = previousOutput;
-    this.currentOutput = currentOutput;
+    this.previousOutput = previousOutput.innerText;
+    this.currentOutput = currentOutput.innerText;
     this.clear();
   }
   clear() {
-    this.currentOutput.innerText = "";
-    this.previousOutput.innerText = "";
+    this.currentOutput = "";
+    this.previousOutput = "";
     this.operation = undefined;
+    this.updateDisplay();
   }
-  delete() {}
+  delete() {
+    this.currentOutput = this.currentOutput.slice(0, -1);
+    this.updateDisplay();
+  }
   appendNumber(number) {
-    if (number === "." && this.currentOutput.innerText.includes(".")) return;
-    this.currentOutput.innerText += number;
+    if (number === "." && this.currentOutput.includes(".")) return;
+    this.currentOutput += number;
+    this.updateDisplay();
   }
   chooseOperation(operation) {
-    this.previousOutput.innerText = this.currentOutput.innerText + operation;
-    this.currentOutput.innerText = "";
+    this.previousOutput = this.currentOutput + operation;
+    this.currentOutput = "";
+    this.updateDisplay();
   }
-  compute(operation) {
-    switch (operation) {
+  compute() {
+    const a = parseFloat(this.previousOutput.slice(0, -1));
+    const b = parseFloat(this.currentOutput);
+    let result = 0;
+    switch (this.previousOutput.slice(-1)) {
       case "+":
-        parseFloat(this.previousOutput.innerText) +
-          parseFloat(this.currentOutput.innerText);
+        result = a + b;
+        this.currentOutput = result;
+        this.previousOutput = "";
+        this.updateDisplay();
+
+        break;
+      case "-":
+        result = a - b;
+        this.currentOutput = result;
+        this.previousOutput = "";
+        this.updateDisplay();
+
+        break;
+      case "*":
+        result = a * b;
+        this.currentOutput = result;
+        this.previousOutput = "";
+        this.updateDisplay();
+
+        break;
+      case "÷":
+        result = a / b;
+        this.currentOutput = result;
+        this.previousOutput = "";
+        this.updateDisplay();
 
         break;
 
@@ -30,7 +62,10 @@ class Calculator {
         break;
     }
   }
-  updateDisplay() {}
+  updateDisplay() {
+    currentOutput.innerText = this.currentOutput;
+    previousOutput.innerText = this.previousOutput;
+  }
 }
 
 const numberButtons = document.querySelectorAll("[data-number]");
@@ -57,4 +92,12 @@ operationButtons.forEach((button) => {
 
 acButton.addEventListener("click", () => {
   calculator.clear();
+});
+
+equalsButton.addEventListener("click", () => {
+  calculator.compute();
+});
+
+delButton.addEventListener("click", () => {
+  calculator.delete();
 });
